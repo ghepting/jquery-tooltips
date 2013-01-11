@@ -8,6 +8,8 @@
   $.fn.tooltip = (options) ->
     defaults =
       topOffset: 0
+      delay: 100                    # delay before showing (ms)
+      speed: 100                    # animation speed (ms)
 
     options = $.extend(defaults, options)
 
@@ -32,26 +34,23 @@
       # tooltip dimensions
       if tooltip.outerWidth() > ($(window).width() - 20)
         tooltip.css('width',$(window).width() - 20)
+      attrs = {}
+      # adjust max width of tooltip
+      tooltip.css('max-width', 
+        Math.min(
+          ($(window).width()-parseInt($('body').css('padding-left'))-parseInt($('body').css('padding-right'))),
+          parseInt(tooltip.css('max-width'))
+        )
+      )
       width = tooltip.outerWidth()
       height = tooltip.outerHeight()
       # horizontal positioning
-      attrs = {}
-      if (width+coords.left) < $(window).width() # left aligned tooltip (default)
+      if coords.left <= coords.right        # default position
         tooltip.addClass('left')
         attrs.left = coords.left
-      else # right aligned tooltip
+      else                                  # pin from right side
         tooltip.addClass('right')
         attrs.right = coords.right
-        # adjust max width
-        tooltip.css('max-width', 
-          Math.min(
-            (coords.left+trigger.outerWidth()-10),
-            parseInt(tooltip.css('max-width'))
-          )
-        )
-        # recalculate dimensions
-        width = tooltip.outerWidth()
-        height = tooltip.outerHeight()
       # veritcal positioning
       if (coords.top-options.topOffset) > (height+20) # top positioned tooltip
         tooltip.addClass('top')
@@ -75,8 +74,8 @@
         tooltip.animate
           top: "+=10"
           opacity: 1
-        , 100
-      , 100
+        , options.speed
+      , options.delay
 
     @each ->
       $this = $(this)

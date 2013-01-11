@@ -1,14 +1,16 @@
 /************************************
  *
- *  jQuery Tooltips by Gary Hepting
+ * jQuery Tooltips by Gary Hepting
  *
- ***********************************/
+************************************/
 
 (function($) {
   return $.fn.tooltip = function(options) {
     var closetooltip, defaults, delayShow, getElementPosition, setPosition, showtooltip, tooltip, trigger;
     defaults = {
-      topOffset: 0
+      topOffset: 0,
+      delay: 100,
+      speed: 100
     };
     options = $.extend(defaults, options);
     tooltip = $('#tooltip');
@@ -34,18 +36,16 @@
       if (tooltip.outerWidth() > ($(window).width() - 20)) {
         tooltip.css('width', $(window).width() - 20);
       }
+      attrs = {};
+      tooltip.css('max-width', Math.min($(window).width() - parseInt($('body').css('padding-left')) - parseInt($('body').css('padding-right')), parseInt(tooltip.css('max-width'))));
       width = tooltip.outerWidth();
       height = tooltip.outerHeight();
-      attrs = {};
-      if ((width + coords.left) < $(window).width()) {
+      if (coords.left <= coords.right) {
         tooltip.addClass('left');
         attrs.left = coords.left;
       } else {
         tooltip.addClass('right');
         attrs.right = coords.right;
-        tooltip.css('max-width', Math.min(coords.left + trigger.outerWidth() - 10, parseInt(tooltip.css('max-width'))));
-        width = tooltip.outerWidth();
-        height = tooltip.outerHeight();
       }
       if ((coords.top - options.topOffset) > (height + 20)) {
         tooltip.addClass('top');
@@ -67,8 +67,8 @@
         return tooltip.animate({
           top: "+=10",
           opacity: 1
-        }, 100);
-      }, 100);
+        }, options.speed);
+      }, options.delay);
     };
     return this.each(function() {
       var $this;
