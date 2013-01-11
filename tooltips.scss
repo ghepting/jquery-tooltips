@@ -1,0 +1,173 @@
+/* =============================================
+ *        Tooltips by Gary Hepting 
+ *          Last Updated:2013-1-11
+ * ===========================================*/
+.tooltip:not([title]):not([role~=tooltip]) {
+  position:relative;
+  padding:5px 15px;
+  background:#fefefe; // fallback
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fefefe', endColorstr='#efefef',GradientType=0 ); // IE 6-8
+  background:-ms-linear-gradient(top, #fefefe 0%, #efefef 100%); // IE 10+
+  background:-o-linear-gradient(top, #fefefe 0%, #efefef 100%); // Opera
+  background:-moz-linear-gradient(top, #fefefe 0%, #efefef 100%); // Firefox
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0%, #fefefe), color-stop(100%, #efefef));  // Webkit (Safari, Chrome, other)
+  background:-webkit-linear-gradient(top, #fefefe 0%, #efefef 100%);  // Webkit (Safari, Chrome, other)
+  background:linear-gradient(to bottom, #fefefe 0%, #efefef 100%);
+  border:1px solid #ccc;
+  border-radius:4px;
+  box-shadow:3px 3px 8px rgba(0, 0, 0, 0.15);
+  font-size:13px;
+  color:#505050;
+  &:after {
+    content:'';
+    display:block;
+    position:absolute;
+    margin-top:5px;
+    width:0;
+    height:0;
+    border-top:6px solid #efefef;
+    border-right:6px solid transparent;
+    border-left:6px solid transparent;
+  }
+  &:before {
+    content:'';
+    display:block;
+    position:absolute;
+    bottom:-7px;
+    left:12px;
+    border-top:6px solid #ccc;
+    border-right:9px solid transparent;
+    border-left:9px solid transparent;
+  }
+  a.close {
+    display:block;
+    width:17px;
+    height:17px;
+    line-height:17px;
+    padding:0;
+    margin:0 -10px 5px 5px;
+    text-align:center;
+    float:right;
+    color:#505050;
+    border:1px solid lighten(#505050, 15%);
+    background:#fff;
+    text-decoration:none;
+    font-size:12px;
+    border-radius:2px;
+    i {
+      color:inherit;
+    }
+  }
+}
+#tooltip {
+  box-sizing:border-box;
+  display:block;
+  max-width:640px;
+  position:absolute;
+  z-index:97;
+  padding:5px 15px;
+  background:#fefefe; // fallback
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fefefe', endColorstr='#efefef',GradientType=0 ); // IE 6-8
+  background:-ms-linear-gradient(top, #fefefe 0%, #efefef 100%); // IE 10+
+  background:-o-linear-gradient(top, #fefefe 0%, #efefef 100%); // Opera
+  background:-moz-linear-gradient(top, #fefefe 0%, #efefef 100%); // Firefox
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0%, #fefefe), color-stop(100%, #efefef));  // Webkit (Safari, Chrome, other)
+  background:-webkit-linear-gradient(top, #fefefe 0%, #efefef 100%);  // Webkit (Safari, Chrome, other)
+  background:linear-gradient(to bottom, #fefefe 0%, #efefef 100%);
+  border:1px solid #ccc;
+  border-radius:4px;
+  box-shadow:3px 3px 8px rgba(0, 0, 0, 0.15);
+  font-size:13px;
+  text-transform:normal;
+  color:#505050;
+  &:after, &:before {
+    content:'';
+    position:absolute;
+    z-index:98;
+    width:0;
+    height:0;
+  }
+  &:after {
+    z-index:99;
+  }
+  &.top.right {
+    &:after {
+      top:auto;
+      right:12px;
+      bottom:-6px;
+      left:auto;
+      border-top:6px solid #efefef;
+      border-right:6px solid transparent;
+      border-left:6px solid transparent;
+    }
+    &:before {
+      top:auto;
+      right:10px;
+      bottom:-7px;
+      left:auto;
+      border-top:6px solid #ccc;
+      border-right:8px solid transparent;
+      border-left:8px solid transparent;
+    }
+  }
+  &.top.left {
+    &:after {
+      top:auto;
+      right:auto;
+      bottom:-6px;
+      left:12px;
+      border-top:6px solid #efefef;
+      border-right:6px solid transparent;
+      border-left:6px solid transparent;
+    }
+    &:before {
+      top:auto;
+      right:auto;
+      bottom:-7px;
+      left:10px;
+      border-top:6px solid #ccc;
+      border-right:8px solid transparent;
+      border-left:8px solid transparent;
+    }
+  }
+  &.bottom.right {
+    &:after {
+      top:-6px;
+      right:12px;
+      bottom:auto;
+      left:auto;
+      border-right:6px solid transparent;
+      border-bottom:6px solid #fefefe;
+      border-left:6px solid transparent;
+    }
+    &:before {
+      top:-7px;
+      right:10px;
+      bottom:auto;
+      left:auto;
+      border-right:8px solid transparent;
+      border-bottom:6px solid #ccc;
+      border-left:8px solid transparent;
+    }
+  }
+  &.bottom.left {
+    &:after {
+      top:-6px;
+      right:auto;
+      bottom:auto;
+      left:12px;
+      border-right:6px solid transparent;
+      border-bottom:6px solid #fefefe;
+      border-left:6px solid transparent;
+    }
+    &:before {
+      top:-7px;
+      right:auto;
+      bottom:auto;
+      left:10px;
+      border-right:8px solid transparent;
+      border-bottom:6px solid #ccc;
+      border-left:8px solid transparent;
+    }
+  }
+}

@@ -43,7 +43,12 @@
         tooltip.addClass('right')
         attrs.right = coords.right
         # adjust max width
-        tooltip.css('max-width', (coords.left+trigger.outerWidth())-10)
+        tooltip.css('max-width', 
+          Math.min(
+            (coords.left+trigger.outerWidth()-10),
+            parseInt(tooltip.css('max-width'))
+          )
+        )
         # recalculate dimensions
         width = tooltip.outerWidth()
         height = tooltip.outerHeight()
